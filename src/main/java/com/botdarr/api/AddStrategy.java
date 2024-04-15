@@ -96,7 +96,7 @@ public abstract class AddStrategy<T> {
       }
       if (restOfItems.size() > 1) {
         restOfItems = ListUtils.subList(restOfItems, MAX_RESULTS_TO_SHOW);
-        // restOfItems.add(0, new InfoResponse("Too many " + contentDisplayName + "s found, please narrow search or increase max results to show"));
+        restOfItems.add(0, new InfoResponse("Too many " + contentDisplayName + "s found, please narrow search or increase max results to show"));
       }
       if (restOfItems.size() == 0) {
         return Collections.singletonList(new InfoResponse("No new " + contentDisplayName + "s found, check existing " + contentDisplayName + "s"));
