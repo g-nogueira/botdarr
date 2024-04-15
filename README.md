@@ -3,6 +3,28 @@
 [![Latest Version](https://img.shields.io/docker/v/shayaantx/botdarr/latest)](https://github.com/shayaantx/botdarr/releases/latest)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
+- [Summary](#summary)
+  - [Currently, Supported API's](#currently-supported-apis)
+  - [Currently, Supported Chat Client's](#currently-supported-chat-clients)
+  - [Currently, Supported Feature's](#currently-supported-features)
+  - [Discord Bot Installation](#discord-bot-installation)
+  - [Slack Bot Installation](#slack-bot-installation)
+  - [Telegram bot installation](#telegram-bot-installation)
+  - [Matrix bot installation](#matrix-bot-installation)
+  - [Jar installation/Configuration](#jar-installationconfiguration)
+  - [Run with Docker](#run-with-docker)
+    - [Environment Variable configuration](#environment-variable-configuration)
+      - [Chat Client Variables](#chat-client-variables)
+      - [Radarr](#radarr)
+      - [Sonarr](#sonarr)
+      - [Lidarr](#lidarr)
+      - [Misc](#misc)
+  - [Usage](#usage)
+- [Building](#building)
+  - [Prerequisites](#prerequisites)
+  - [Building for Development](#building-for-development)
+
+
 # Summary
 
 Made this simple multi chat-client bot to access radarr, sonarr, and lidarr without a UI/server.
@@ -218,3 +240,28 @@ botdarr:
   * !movies help
 * The default command prefix is !. I chose ! because / (original command prefix) is commonly used by many chat clients and has existing functionality with it that leads to some commands not working nicely.
 <br/>
+
+# Building
+## Prerequisites
+Before you can build this project, you must install and configure the following dependencies on your machine:
+
+Java JDK 8
+With Chocolatey
+```Powershell
+choco install openjdk8
+```
+[Apache Maven](https://maven.apache.org/) to build the project.
+```Powershell
+choco install maven --version=3.9.6
+```
+
+## Building for Development
+
+Follow these steps to build and run the project:
+
+1. Clone the repository to your local machine.
+2. Navigate to the project directory.
+3. Run the following command to build the project:
+```Powershell
+mvn package
+```
