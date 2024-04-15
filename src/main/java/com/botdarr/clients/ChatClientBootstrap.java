@@ -86,6 +86,8 @@ public abstract class ChatClientBootstrap {
           chatSender.send(clientResponse);
         }
       }
+    } catch (Exception e){
+      LOGGER.error("Error processing command " + message, e);
     } finally {
       CommandContext.end();
     }
