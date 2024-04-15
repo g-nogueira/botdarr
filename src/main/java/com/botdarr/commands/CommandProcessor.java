@@ -6,6 +6,7 @@ import com.botdarr.commands.responses.ErrorResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.text.Normalizer;
 import java.util.Collections;
 import java.util.List;
 
@@ -26,7 +27,10 @@ public class CommandProcessor {
       }
       for (Command apiCommand : apiCommands) {
         String command = apiCommand.getIdentifier().toLowerCase();
-        boolean foundCommand = apiCommand.hasArguments() ? processedCommand.startsWith(command) : processedCommand.equalsIgnoreCase(command);
+        String normalizedCommand = Normalizer.normalize(processedCommand, Normalizer.Form.NFD);
+        String cleanCommand = normalizedCommand.replaceAll("\\p{M}", "").toLowerCase();
+
+        boolean foundCommand = apiCommand.hasArguments() ? cleanCommand.startsWith(cleanCommand) : cleanCommand.equalsIgnoreCase(cleanCommand);
         if (foundCommand) {
           String commandOperation = processedCommand.replaceAll(command, "");
           return apiCommand.execute(commandOperation.trim());
