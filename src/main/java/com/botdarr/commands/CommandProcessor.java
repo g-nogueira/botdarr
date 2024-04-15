@@ -30,7 +30,7 @@ public class CommandProcessor {
         String normalizedCommand = Normalizer.normalize(processedCommand, Normalizer.Form.NFD);
         String cleanCommand = normalizedCommand.replaceAll("\\p{M}", "").toLowerCase();
 
-        boolean foundCommand = apiCommand.hasArguments() ? cleanCommand.startsWith(cleanCommand) : cleanCommand.equalsIgnoreCase(cleanCommand);
+        boolean foundCommand = apiCommand.hasArguments() ? cleanCommand.startsWith(command) : cleanCommand.equalsIgnoreCase(command);
         if (foundCommand) {
           String commandOperation = processedCommand.replaceAll(command, "");
           return apiCommand.execute(commandOperation.trim());
