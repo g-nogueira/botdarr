@@ -25,8 +25,12 @@ public class SonarrApi implements Api {
     return getDownloadsStrategy().downloads();
   }
 
-  public CommandResponse addWithId(String searchText, String id) {
-    return getAddStrategy().addWithSearchId(searchText, id);
+  public CommandResponse addWithIdAndTitle(String searchText, String id) {
+    return getAddStrategy().addWithSearchIdAndTitle(searchText, id);
+  }
+
+  public CommandResponse addWithId(String id) {
+    return getAddStrategy().addWithSearchId(id);
   }
 
   public List<CommandResponse> addWithTitle(String searchText) {

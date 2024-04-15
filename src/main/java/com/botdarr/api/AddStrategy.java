@@ -23,7 +23,30 @@ public abstract class AddStrategy<T> {
   public abstract CommandResponse addContent(T content);
   public abstract CommandResponse getNewItemResponse(T item);
 
-  public CommandResponse addWithSearchId(String searchText, String id) {
+  public CommandResponse addWithSearchId(String id) {
+    try {
+      List<T> items = lookupContent("tvdb:" + id);
+
+      if (items.isEmpty()) {
+        LOGGER.warn("Search id " + id + "yielded no " + this.contentDisplayName + "s, stopping");
+        return new ErrorResponse("No " + this.contentDisplayName + "s found");
+      }
+      for (T item : items) {
+        if (getItemId(item).equalsIgnoreCase(id)) {
+          if (doesItemExist(item)) {
+            return new ErrorResponse(this.contentDisplayName + " already exists");
+          }
+          return addContent(item);
+        }
+      }
+      return new ErrorResponse("Could not find " + contentDisplayName + " with id=" + id);
+    } catch (Throwable e) {
+      LOGGER.error("Error trying to add " + contentDisplayName, e);
+      return new ErrorResponse("Error adding content, e=" + e.getMessage());
+    }
+  }
+
+  public CommandResponse addWithSearchIdAndTitle(String searchText, String id) {
     try {
       List<T> items = lookupContent(searchText);
       if (items.isEmpty()) {
@@ -73,7 +96,7 @@ public abstract class AddStrategy<T> {
       }
       if (restOfItems.size() > 1) {
         restOfItems = ListUtils.subList(restOfItems, MAX_RESULTS_TO_SHOW);
-        restOfItems.add(0, new InfoResponse("Too many " + contentDisplayName + "s found, please narrow search or increase max results to show"));
+        // restOfItems.add(0, new InfoResponse("Too many " + contentDisplayName + "s found, please narrow search or increase max results to show"));
       }
       if (restOfItems.size() == 0) {
         return Collections.singletonList(new InfoResponse("No new " + contentDisplayName + "s found, check existing " + contentDisplayName + "s"));

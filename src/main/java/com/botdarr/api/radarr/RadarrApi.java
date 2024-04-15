@@ -58,7 +58,7 @@ public class RadarrApi implements Api {
   }
 
   public CommandResponse addWithId(String searchText, String tmdbId) {
-    return getAddStrategy().addWithSearchId(searchText, tmdbId);
+    return getAddStrategy().addWithSearchIdAndTitle(searchText, tmdbId);
   }
 
   public List<CommandResponse> getProfiles() {

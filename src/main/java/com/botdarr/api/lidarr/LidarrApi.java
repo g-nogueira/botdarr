@@ -114,7 +114,7 @@ public class LidarrApi implements Api {
   }
 
   public CommandResponse addArtistWithId(String id, String artistName) {
-    return getArtistAddStrategy().addWithSearchId(artistName, id);
+    return getArtistAddStrategy().addWithSearchIdAndTitle(artistName, id);
   }
 
   public List<CommandResponse> addArtist(String artistToSearch) {

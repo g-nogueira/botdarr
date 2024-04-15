@@ -249,7 +249,7 @@ public class CommandProcessorTests {
   @Test
   public void processMessage_validShowTitleAndIdForAddCommand() {
     new Expectations() {{
-      sonarrApi.addWithId("princess5", "46475"); times = 1; result = new TestCommandResponse();
+      sonarrApi.addWithIdAndTitle("princess5", "46475"); times = 1; result = new TestCommandResponse();
     }};
     validateValidCommand("!show id add Princess5 46475");
   }

@@ -38,7 +38,7 @@ public class AddStrategyTests {
       logger.warn("Search id " + searchId + "yielded no movies, stopping");
       mockAddStrategy.lookupItemById(searchId); times = 1; result = Collections.emptyList();
     }};
-    CommandResponse commandResponse = mockAddStrategy.addWithSearchId(searchText, searchId);
+    CommandResponse commandResponse = mockAddStrategy.addWithSearchIdAndTitle(searchText, searchId);
     Assert.assertNotNull(commandResponse);
     Assert.assertTrue(
             EqualsBuilder.reflectionEquals(
@@ -57,7 +57,7 @@ public class AddStrategyTests {
       mockAddStrategy.getItemId(movie); times = 1; result = searchId;
       mockAddStrategy.doesItemExist(movie); times = 1; result = true;
     }};
-    CommandResponse commandResponse = mockAddStrategy.addWithSearchId(searchText, searchId);
+    CommandResponse commandResponse = mockAddStrategy.addWithSearchIdAndTitle(searchText, searchId);
     Assert.assertNotNull(commandResponse);
     Assert.assertTrue(
             EqualsBuilder.reflectionEquals(
@@ -75,7 +75,7 @@ public class AddStrategyTests {
       mockAddStrategy.lookupContent(searchText); times = 1; result = Arrays.asList(movie);
       mockAddStrategy.getItemId(movie); times = 1; result = "unknownId";
     }};
-    CommandResponse commandResponse = mockAddStrategy.addWithSearchId(searchText, searchId);
+    CommandResponse commandResponse = mockAddStrategy.addWithSearchIdAndTitle(searchText, searchId);
     Assert.assertNotNull(commandResponse);
     Assert.assertTrue(
             EqualsBuilder.reflectionEquals(
@@ -96,7 +96,7 @@ public class AddStrategyTests {
       mockAddStrategy.doesItemExist(movie); times = 1; result = false;
       mockAddStrategy.addContent(movie); times = 1; result = expectedResponse;
     }};
-    CommandResponse commandResponse = mockAddStrategy.addWithSearchId(searchText, searchId);
+    CommandResponse commandResponse = mockAddStrategy.addWithSearchIdAndTitle(searchText, searchId);
     Assert.assertNotNull(commandResponse);
     Assert.assertEquals(expectedResponse, commandResponse);
   }
@@ -111,7 +111,7 @@ public class AddStrategyTests {
       mockAddStrategy.lookupContent(searchText); times = 1; result = expectedException;
       logger.error("Error trying to add movie", expectedException); times = 1;
     }};
-    CommandResponse commandResponse = mockAddStrategy.addWithSearchId(searchText, searchId);
+    CommandResponse commandResponse = mockAddStrategy.addWithSearchIdAndTitle(searchText, searchId);
     Assert.assertNotNull(commandResponse);
     Assert.assertTrue(
             EqualsBuilder.reflectionEquals(
