@@ -104,7 +104,8 @@ public class DiscordBootstrapTests {
             mockedEmbed.getTitle(); result = "ShowTitle1";
         }};
         String command = new DiscordBootstrap().getCommandFromEmbed(mockedEmbed);
-        Assert.assertEquals("!show id add ShowTitle1 43234", command);
+        Assert.assertEquals("!show id add ShowTitle1 43234\nor\n!serie: 43234", command);
+        
     }
 
     @Test
